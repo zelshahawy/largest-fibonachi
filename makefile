@@ -1,11 +1,17 @@
-# Makefile for macOS + Homebrew Boost
+# Makefile for macOS + Homebrew Boost+GMP
 
 CXX      := clang++
+# pick up Boost headers, and (via --prefix) GMP headers too
 CXXFLAGS := -std=c++17 -O3 -pthread \
-             -I$(shell brew --prefix boost)/include
-LDFLAGS  := -L$(shell brew --prefix boost)/lib
+             -I$(shell brew --prefix boost)/include \
+             -I$(shell brew --prefix gmp)/include
 
-SRCS     := main.cpp     # or fib_limit.cpp if you renamed it
+# library search paths + the actual libs
+LDFLAGS  := -L$(shell brew --prefix boost)/lib \
+             -L$(shell brew --prefix gmp)/lib \
+             -lgmpxx -lgmp
+
+SRCS     := main.cpp   # ← change to the name of your source file
 TARGET   := fib_limit
 
 .PHONY: all clean run
