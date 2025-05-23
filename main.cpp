@@ -1,23 +1,14 @@
-#include <boost/multiprecision/gmp.hpp>
+#include "main.hpp"
 #include <chrono>
 #include <iostream>
 
-using boost::multiprecision::mpz_int;
-using BigInt = mpz_int;
 using Clock = std::chrono::high_resolution_clock;
 
-// 2×2 matrix of BigInt
-struct Mat {
-  BigInt a, b, c, d;
-};
-
-// Matrix multiplication
 Mat mat_mul(const Mat &x, const Mat &y) {
   return Mat{x.a * y.a + x.b * y.c, x.a * y.b + x.b * y.d,
              x.c * y.a + x.d * y.c, x.c * y.b + x.d * y.d};
 }
 
-// Fast exponentiation by squaring
 Mat mat_pow(Mat base, uint64_t exp) {
   Mat result{1, 0, 0, 1};
   while (exp) {
@@ -29,7 +20,6 @@ Mat mat_pow(Mat base, uint64_t exp) {
   return result;
 }
 
-// Compute F(n) via matrix power: F(n) = [[1,1],[1,0]]^n .b
 BigInt fib(uint64_t n) {
   Mat M{1, 1, 1, 0};
   return mat_pow(M, n).b;
@@ -40,7 +30,7 @@ int main() {
   uint64_t low = 0, high = 1, best = 0;
   double elapsed;
 
-  // Exponential search to bracket maximum n
+  // Exponential bracket
   while (true) {
     auto start = Clock::now();
     fib(high);
@@ -52,7 +42,7 @@ int main() {
     high <<= 1;
   }
 
-  // Binary search within [low, high)
+  // Binary search
   while (low < high - 1) {
     uint64_t mid = low + (high - low) / 2;
     auto start = Clock::now();
