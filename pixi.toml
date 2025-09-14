@@ -5,8 +5,6 @@ name = "largest-fibonachi"
 platforms = ["osx-arm64"]
 version = "0.1.0"
 
-[tasks]
-
 [dependencies]
 cxx-compiler = ">=1.11.0,<2"
 cmake = ">=4.1.1,<5"
@@ -14,3 +12,8 @@ ninja = ">=1.13.1,<2"
 pkg-config = ">=0.29.2,<0.30"
 boost-cpp = ">=1.85.0,<2"
 gmp = ">=6.3.0,<7"
+
+[tasks]
+configure = "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release"
+build = "cmake --build build -j"
+run = "./build/fib_limit"    # on Windows, use .\\build\\hello.exe
