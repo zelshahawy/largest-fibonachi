@@ -1,4 +1,6 @@
-./fib_limit
+fib_limit
+build
+
 
 # pixi environments
 .pixi
