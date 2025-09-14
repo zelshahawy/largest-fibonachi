@@ -1,1 +1,5 @@
 ./fib_limit
+
+# pixi environments
+.pixi
+*.egg-info

@@ -1,0 +1,16 @@
+[workspace]
+authors = ["Ziad Elshahawy <ziadelshahawygit@gmail.com>"]
+channels = ["conda-forge"]
+name = "largest-fibonachi"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+cxx-compiler = ">=1.11.0,<2"
+cmake = ">=4.1.1,<5"
+ninja = ">=1.13.1,<2"
+pkg-config = ">=0.29.2,<0.30"
+boost-cpp = ">=1.85.0,<2"
+gmp = ">=6.3.0,<7"
